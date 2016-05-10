@@ -45,7 +45,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../../config/config.php' => config_path('sf-form.php')
-        ]);
+        ], 'config');
     }
 
     public function register()

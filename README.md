@@ -1,4 +1,5 @@
 # Laravel 5 - Symfony Form integration
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9a5bdc90-58b2-428c-9294-746ddbe03026/big.png)](https://insight.sensiolabs.com/projects/9a5bdc90-58b2-428c-9294-746ddbe03026)
 
 This integration based on Silex implementation of Symfony Form.
 This package also works out of the box with [Twig](https://github.com/rcrowe/TwigBridge) &
@@ -13,7 +14,7 @@ For detailed documentation, please check this (WIP)
 ``` json
 {
     "require": {
-        "hnd/sf-form": "^1.0"
+        "hnd/sf-form": "dev-master"
     }
 }
 ```
