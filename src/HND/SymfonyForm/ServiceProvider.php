@@ -161,6 +161,20 @@ class ServiceProvider extends BaseServiceProvider
         $path = dirname($reflected->getFileName()).'/../Resources/views/Form';
         $this->app['twig.loader']->addLoader(new \Twig_Loader_Filesystem($path));
         $this->app['twig.loader']->addLoader(new \Twig_Loader_Filesystem($this->app['config']['view.paths']));
+
+        // Allow Laravel View Finder to search for twig template in Symfony Twig Bridge package
+        $viewFileFinder = $this->app['view']->getFinder();
+        $viewFileFinder->addLocation($path);
+        $viewFileFinder->addExtension($this->app['twig.extension']);
+        $viewFileFinder->addExtension('html.twig');
+
+        $this->app->bindIf('twig.loader.viewfinder', function () {
+            return new Loader\Loader(
+                $this->app['files'],
+                $this->app['view']->getFinder(),
+                $this->app['twig.extension']
+            );
+        });
     }
 
     protected function registerCsrf()
