@@ -2,6 +2,7 @@
 
 namespace HND\SymfonyForm;
 
+use HND\SymfonyForm\CsrfToken\SessionTokenStorage;
 use HND\SymfonyForm\Validator\ConstraintValidatorFactory;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -15,7 +16,6 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
 use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
-use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
 
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
