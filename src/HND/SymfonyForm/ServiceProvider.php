@@ -3,10 +3,12 @@
 namespace HND\SymfonyForm;
 
 use HND\SymfonyForm\CsrfToken\SessionTokenStorage;
+use HND\SymfonyForm\Translator\LaravelTranslatorAdapter;
 use HND\SymfonyForm\Validator\ConstraintValidatorFactory;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Loader\LoaderChain;
 use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
@@ -92,7 +94,14 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->app['form.extension.csrf'] = function ($app) {
             if (isset($app['translator'])) {
-                return new CsrfExtension($app['sf.csrf.token_manager'], $app['translator']);
+
+                if($app['translator'] instanceof TranslatorInterface) {
+                    $translator = $app['translator'];
+                } else {
+                    $translator = new LaravelTranslatorAdapter($app['translator']);
+                }
+
+                return new CsrfExtension($app['sf.csrf.token_manager'], $translator);
             }
             return new CsrfExtension($app['sf.csrf.token_manager']);
         };
