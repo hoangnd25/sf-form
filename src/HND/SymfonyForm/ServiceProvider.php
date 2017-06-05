@@ -6,6 +6,7 @@ use HND\SymfonyForm\CsrfToken\SessionTokenStorage;
 use HND\SymfonyForm\Translator\LaravelTranslatorAdapter;
 use HND\SymfonyForm\Validator\ConstraintValidatorFactory;
 
+use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 use Symfony\Component\Translation\TranslatorInterface;
@@ -196,7 +197,11 @@ class ServiceProvider extends BaseServiceProvider
             $laravelSession = $app['session.store'];
             if($laravelSession){
                 if (isset($app['session'])) {
-                    return new SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
+                    if ($laravelSession instanceof Store) {
+                        return new SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
+                    } else {
+                        return new \Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
+                    }
                 }
             }
             // If Laravel session is not available, use native session
