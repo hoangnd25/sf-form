@@ -197,10 +197,10 @@ class ServiceProvider extends BaseServiceProvider
             $laravelSession = $app['session.store'];
             if($laravelSession){
                 if (isset($app['session'])) {
-                    if ($laravelSession instanceof Store) {
-                        return new SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
-                    } else {
+                    if ($laravelSession instanceof SessionInterface) {
                         return new \Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
+                    } else {
+                        return new SessionTokenStorage($laravelSession, $app['sf.csrf.session_namespace']);
                     }
                 }
             }
