@@ -220,7 +220,14 @@ class ServiceProvider extends BaseServiceProvider
             $builder->addObjectInitializers($app['sf.validator.object_initializers']);
             $builder->setMetadataFactory($app['sf.validator.mapping.class_metadata_factory']);
             if (isset($app['translator'])) {
-                $builder->setTranslator($app['translator']);
+
+                if($app['translator'] instanceof TranslatorInterface) {
+                    $translator = $app['translator'];
+                } else {
+                    $translator = new LaravelTranslatorAdapter($app['translator']);
+                }
+
+                $builder->setTranslator($translator);
             }
             return $builder;
         };
