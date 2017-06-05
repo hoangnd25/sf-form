@@ -65,7 +65,7 @@ class SessionTokenStorage implements TokenStorageInterface
             $this->session->start();
         }
 
-        $this->session->set($this->namespace.'/'.$tokenId, (string) $token);
+        $this->session->put($this->namespace.'/'.$tokenId, (string) $token);
     }
 
     /**
