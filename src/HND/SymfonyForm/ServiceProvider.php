@@ -9,6 +9,7 @@ use HND\SymfonyForm\Validator\ConstraintValidatorFactory;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Loader\LoaderChain;
