@@ -19,11 +19,11 @@ class LaravelTranslatorAdapter implements TranslatorInterface
     }
 
     public function trans($id, array $parameters = array(), $domain = null, $locale = null){
-        $this->translator->trans($id, $parameters, $locale);
+        return $this->translator->trans($id, $parameters, 'en');
     }
 
     public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null){
-        $this->translator->transChoice($id, $number, $parameters, $locale);
+        return $this->translator->transChoice($id, $number, $parameters, $locale);
     }
 
     public function setLocale($locale){
